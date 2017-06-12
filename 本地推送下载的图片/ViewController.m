@@ -30,7 +30,7 @@
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
     content.badge = @1;
     content.title = @"通知的标题";
-    content.body = @"我老婆最温柔~最美丽~";   //如果没有body则不会弹出通知
+    content.body = @"推送下载图片";   //如果没有body则不会弹出通知
     UNNotificationSound *sound = [UNNotificationSound defaultSound];
     content.sound = sound;
     
@@ -47,7 +47,7 @@
     
     //2.2图片保存到沙盒
     NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    NSString *localPath = [documentPath stringByAppendingPathComponent:@"localNotificationImage.jpg"];
+    NSString *localPath = [documentPath stringByAppendingPathComponent:@"haha.jpg"];
     [imageData writeToFile:localPath atomically:YES];
     
     
@@ -116,12 +116,18 @@
 }
 
 #pragma mark - UNUserNotificationCenterDelegate
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
+    
+    // 展示
+    completionHandler(UNNotificationPresentationOptionAlert|UNNotificationPresentationOptionSound);
+    
+    //    // 不展示
+    //    completionHandler(UNNotificationPresentationOptionNone);
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:notification.request.content.title message:notification.request.content.body preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"知道了啊!" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alert addAction:cancleAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    NSLog(@"%@---%@", response, completionHandler);
 }
 @end

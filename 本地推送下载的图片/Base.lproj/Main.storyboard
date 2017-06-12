@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" constant="200" id="L1p-Gr-mwK"/>
                                     <constraint firstAttribute="height" constant="44" id="m6f-kW-Pfi"/>
                                 </constraints>
-                                <state key="normal" title="For my pusswzy girl ~">
+                                <state key="normal" title="Run Demo">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
